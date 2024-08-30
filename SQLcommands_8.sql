@@ -27,3 +27,22 @@ select exp(1);
 
 # log
 select log(2.718281828459045);
+
+use sakila;
+select * from payment;
+
+select payment_id,rental_id, year(payment_date) as Pay_year , month(payment_date) as pay_month, 
+day(payment_date) as pay_day, time(payment_date) as pay_time
+from payment;
+
+# taking diference from todays date using "DATEDIFF"
+select payment_id,timediff(current_date() - (payment_date)) as payed_ago from payment;
+
+SELECT TIMEDIFF('2024-08-29 15:00:00', '2024-08-30 10:00:00') AS TimeDifference;
+
+# Retrives data using subqueries
+select * from film;
+select film_id, category_id
+from film_category
+where film_id in (select film_id from film
+where rental_duration = 6);
